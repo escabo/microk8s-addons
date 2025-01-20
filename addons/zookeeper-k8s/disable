@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -e
+
+source $SNAP/actions/common/utils.sh
+
+NAMESPACE="zookeeper"
+
+KUBECTL="$SNAP/microk8s-kubectl.wrapper"
+
+echo "Deleting Zookeeper"
+
+$KUBECTL delete -f https://k8s.io/examples/application/zookeeper/zookeeper.yaml > /dev/null 2>&1 || true
+$KUBECTL delete namespace "$NAMESPACE" > /dev/null 2>&1 || true
+
+echo "Zookeeper removed"
